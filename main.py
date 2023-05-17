@@ -1,4 +1,4 @@
-from function import read_executed_operation
+from function import creates_correct_list
 
 if __name__ == '__main__':
-    print(read_executed_operation())
+    print(creates_correct_list())
