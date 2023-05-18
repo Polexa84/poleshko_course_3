@@ -1,16 +1,15 @@
 import pytest
-from function import creates_correct_list, read_executed_operation
-import json
-from datetime import datetime
-from function import load_operation
+from function import convert_operations_to_correct_format
+from function import load_operations
 
 
 def test_load_operation():
-    data = load_operation()
+    data = load_operations()
     assert isinstance(data, list)
 
+
 def test_creates_correct_list():
-    result = creates_correct_list()
+    result = convert_operations_to_correct_format()
 
     # Прроверка наличия определенных строк в ртзультатах
     assert '08.12.2019 Открытие вклада\n' in result

@@ -1,4 +1,6 @@
-from function import creates_correct_list
+# Импортируем функции
+from function import convert_operations_to_correct_format
 
+# Запуск программы
 if __name__ == '__main__':
-    print(creates_correct_list())
+    print(convert_operations_to_correct_format())
