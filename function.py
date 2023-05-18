@@ -1,33 +1,39 @@
+# Импортируем библиотеки
 import json
 from datetime import datetime
 
 
-def load_operation():
+def load_operations():
     """"Загружает список операций из файла"""
     with open("operations.json", "r") as list:
         operations_list = json.load(list)
         return operations_list
 
 
-def read_executed_operation():
-    """"Выбирает успешную операцию и сортерует этот список по дате"""
+def get_sorted_successful_operations():
+    """"Выбирает только успешные операцию"""
     executed_items = []
-    for item in load_operation():
+    for item in load_operations():
         for key, value in item.items():
             if value == "EXECUTED":
                 executed_items.append(item)
-    sorted_items = sorted(executed_items, key=lambda x: x['date'])
+    return executed_items
+
+
+def get_successful_operations_sorted_by_date():
+    """"Успешные операции сортерует по дате"""
+    sorted_items = sorted(get_sorted_successful_operations(), key=lambda x: x['date'])
     return sorted_items
 
 
-def creates_correct_list():
+def convert_operations_to_correct_format():
     """"Раскладывает полученые операции выше и собирает в нужный формат"""
 
     # Дробовляем переменную и финальную фразу
     count = 0
     result = ""
     # Дробим список и собираем в нужном формате
-    operations = read_executed_operation()
+    operations = get_successful_operations_sorted_by_date()
 
     for operation in reversed(operations):
         if count < 5:
@@ -48,7 +54,6 @@ def creates_correct_list():
                 to_account = f'{" ".join(operation["to"].split()[:-1])} ' \
                              f'{operation["to"].split()[-1][:4]} {operation["to"].split()[-1][4:6]}** ' \
                              f'**** {operation["to"].split()[-1][-4:]}'
-
             if from_account is None:
                 from_account = "Внесение наличных"
             elif from_account.split()[0] == "Счет":
