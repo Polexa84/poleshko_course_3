@@ -1,13 +1,18 @@
 # Импортируем библиотеки
 import json
 from datetime import datetime
+import sys
 
 
 def load_operations():
-    """"Загружает список операций из файла"""
-    with open("operations.json", "r") as list:
-        operations_list = json.load(list)
-        return operations_list
+    """Загружает список операций из файла"""
+    try:
+        with open("operations.json", "r") as list:
+            operations_list = json.load(list)
+            return operations_list
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+            print(f"Ошибка при загрузке операций! Причина: {e}")
+            sys.exit("Устраните ошибку и запустите программу заново!")
 
 
 def get_sorted_successful_operations():
