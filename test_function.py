@@ -5,7 +5,7 @@ from function import load_operations
 
 def test_load_operation():
     data = load_operations()
-    assert isinstance(data, list)
+    assert isinstance(data, list), "Неверный формат данных: должен быть список"
 
 
 def test_creates_correct_list():
@@ -19,7 +19,7 @@ def test_creates_correct_list():
     assert '05.11.2019 Открытие вклада\n' in result
 
     # Прроверка количества строк
-    assert len(result.split('\n')) == 21
+    assert len(result.split('\n')) == 21, "Неверное количество строк в результирующей строке"
 
 
 if __name__ == "__main__":
